@@ -1,0 +1,23 @@
+.searchBox{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+}
+.searchBox input[type="text"]{
+    width: 250px;
+    height: 40px;
+}
+.searchBox input[type="submit"]{
+    width: 75px;
+    height: 40px;
+    margin-left: 10px;
+}
+.searchBox > input[type="text"]:focus{
+    outline: 0;
+}

@@ -20,7 +20,7 @@ const Header = () => {
         <div className='pages-wrapper'>
           <ul className='pages'>
             <li>Home</li>
-            <li>Product</li>
+            <li>Products</li>
             <li>Contact</li>
             <li>About</li>
           </ul>

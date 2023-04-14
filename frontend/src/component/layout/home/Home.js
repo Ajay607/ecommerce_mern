@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
 import MetaData from '../MetaData';
 import "./Home.css";
-import Product from './Product';
-import { getProduct } from '../../../actions/productAction';
+import Product from './ProductCard';
+import { clearError, getProduct } from '../../../redux/actions/productAction';
 import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import Loader from "../loader/Loader";
@@ -19,29 +19,13 @@ const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { products, error, loading, productCount } = useSelector(state => state.product);
-  console.log("___error___", error, "___loading___", loading);
-  console.log("data_home", products)
 
   useEffect(() => {
     if(error){
-      return alert.error(error)
-    }
+      dispatch(clearError())
+  }
     dispatch(getProduct());
   }, [dispatch, error])
-
-  axios.get('http://localhost:4000/api/v1/products')
-    .then((response) => {
-      console.log("rrrrrrrrrrrrr__________", response);
-    }).catch(error)
-
-  axios
-    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-    .then(response => {
-      console.log("rrrrrrrrrrrrr", response);
-    })
-    .catch(error => {
-      console.log("rrrrrrrreeee", error)
-    })
 
   return (
     // loading is still pending
@@ -61,19 +45,19 @@ const Home = () => {
             </div>
             <h2 className='home-heading'>Featured products</h2>
             <div className='container' id='container'>
+              {/* <Product product={product} />
               <Product product={product} />
               <Product product={product} />
               <Product product={product} />
               <Product product={product} />
               <Product product={product} />
               <Product product={product} />
-              <Product product={product} />
-              <Product product={product} />
-              {/* {
-                products && products.map((product) => (
-                  <Product product={product} />
+              <Product product={product} /> */}
+              {
+                products && products.map((product,id) => (
+                  <Product product={product} key={id} />
                 ))
-              } */}
+              }
             </div>
           </>
       }

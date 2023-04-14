@@ -1,0 +1,40 @@
+.productDetails {
+    display: flex;
+    align-items: center;
+    height: 300px;
+    margin-top: 140px !important;
+}
+.productDetails .imageWrapper {
+}
+.carousel .slider-wrapper {
+    height: 300px;
+}
+.contentWrapper {
+    width: 53vw;
+    height: 66vh;
+    padding-left: 35px;
+}
+.detailsBlock-3-1{
+    display: flex;
+    margin-top: 10px;
+}
+.details-block-4{
+    margin-bottom: 10px;
+}
+.detailsBlock-3-1-1 input,
+.detailsBlock-3-1-1 button {
+    width: 35px;
+    height: 20px;
+    text-align: center;
+}
+.detailsBlock-3-1-1  {
+    margin-right: 20px;
+}
+.stockwrapper{
+    margin: 15px 0;
+}
+.reviewsHeading{
+    margin-top: 61px;
+    text-align: center;
+}
+/* ______________ReviewCard______start_________ */

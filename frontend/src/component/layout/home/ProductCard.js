@@ -12,11 +12,11 @@ const options={
     isHalf: true
 }
 
-const Product = ({ product }) => {
-    // console.log("product", product)
+const ProductCard = ({ product }) => {
+    console.log("tttttttttttttttttt", product)
     return (
         <Link className='productCard' to={`/product/${product._id}`}>
-            <img src={product.images[0].url} alt={product.name}  />
+            <img src={product.images[0]} alt={product.name}  />
             <p>{product.name}</p>
             <div>
                 <ReactStars {...options} /> <span>(256 Reviews)</span>
@@ -26,4 +26,4 @@ const Product = ({ product }) => {
     )
 }
 
-export default Product
+export default ProductCard
