@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
-import MetaData from '../MetaData';
+import React, { Fragment, useEffect } from "react";
+import MetaData from "../MetaData";
 import "./Home.css";
 import Product from './ProductCard';
 import { clearError, getProduct } from '../../../redux/actions/productAction';
 import { useSelector, useDispatch } from "react-redux";
-import axios from 'axios';
+import axios from "axios";
 import Loader from "../loader/Loader";
 import { useAlert } from "react-alert";
 
@@ -12,8 +12,8 @@ const product = {
   name: "Blue Tshirt",
   images: [{ url: "https://i.ibb.co/DRST11n/1.webp" }],
   price: "3000",
-  _id: "abishek"
-}
+  _id: "abishek",
+};
 
 const Home = () => {
   const alert = useAlert();
@@ -25,7 +25,7 @@ const Home = () => {
       dispatch(clearError())
   }
     dispatch(getProduct());
-  }, [dispatch, error])
+  }, [dispatch, error]);
 
   return (
     // loading is still pending
@@ -62,7 +62,7 @@ const Home = () => {
           </>
       }
     </Fragment>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

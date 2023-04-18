@@ -5,7 +5,6 @@ import './Search.css';
 const Search = () => {
     const navigate = useNavigate();
     const [keyword, setKeyword] =useState("");
-    console.log("keyword", keyword)
     const searchSubmitHandler = (e) => {
         e.preventDefault();
         if(keyword.trim()){

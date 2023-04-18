@@ -1,77 +1,71 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearError, getProduct } from '../../redux/actions/productAction';
-import Loader from '../layout/loader/Loader';
-import ProductCard from '../layout/home/ProductCard';
+import { clearError, getProduct } from "../../redux/actions/productAction";
+import Loader from "../layout/loader/Loader";
+import ProductCard from "../layout/home/ProductCard";
 import "./Products.css";
 import { useParams } from "react-router-dom";
-import ReactPaginate from 'react-paginate'; 
+import ReactPaginate from "react-paginate";
 
 const Products = () => {
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-
   const dispatch = useDispatch();
-  const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 8;
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(0);
+  const { keyword } = useParams;
 
-  const { keyword } = useParams();
-
-  const { products, loading, productsCount, error, resultPerPage } = useSelector(
-    (state) => state.product
-  )
-
-
-  // console.log("produccccccccccc", products, "loading", loading, "error", error, "count", productsCount)
+  const { products, loading, productsCount, error, resultPerPage } =
+    useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(getProduct(keyword,currentItems))
-  }, [dispatch])
+    dispatch(getProduct(keyword, currentPage));
+  }, [currentPage]);
 
   const handlePageClick = (event) => {
-    console.log("hhhhhhhhh",event)
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+    const newOffset = event.selected + 1;
+    setCurrentPage(newOffset);
   };
 
   return (
     <>
-      {
-        loading ? <Loader /> :
- 
-        
-          <div className='productWrapper'>
-          { console.log("productsCount", products)}
-            <h1>Products</h1>
-            <div className='products'>
-              {
-                products && products.map((product) => {
-                  console.log("ppppppppppppp", product)
-                  return (<ProductCard key={product.id} product={product} />)
-                })
-              }
-            </div>
-            <div className='paginationWrapper'>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="productWrapper">
+          <h1>Products</h1>
+          <div className="products">
+            {products &&
+              products.map((product) => {
+                return <ProductCard key={product.id} product={product} />;
+              })}
+          </div>
+          {productsCount > 0 && (
+            <div className="paginationWrapper">
               <ReactPaginate
                 breakLabel="..."
                 nextLabel="next >"
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={resultPerPage}
-                pageCount={productsCount}
-                previousLabel="< previous"
-                renderOnZeroPageCount={null}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={Math.ceil(productsCount / resultPerPage)}
+                previousLabel="< prev"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                disableInitialCallback={true}
+                forcePage={currentPage - 1}
               />
             </div>
-          </div>
-      }
+          )}
+        </div>
+      )}
     </>
-  )
-}
+  );
+};
 
 export default Products;

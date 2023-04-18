@@ -10,11 +10,10 @@ import {
     CLEAR_ERRORS
 } from "../constants/productConstants";
 
-export const getProduct = (keyword="",currentImages=1) => async (dispatch) => {
-    console.log("getttttttttt", keyword)
+export const getProduct = (keyword="",currentItems) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCTS_REQUEST })
-        let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentImages}`
+        let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentItems}`
         const { data } = await axios.get(link);
 
         dispatch({
@@ -31,12 +30,9 @@ export const getProduct = (keyword="",currentImages=1) => async (dispatch) => {
 }
 
 export const getProductDetails = (id) => async (dispatch) => {
-    console.log("data_____out")
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
-        console.log("data_____dispatch_before")
         const { data } = await axios.get(`http://localhost:4000/api/v1/product/${id}`);
-        console.log("data______dispatch_after", data)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
